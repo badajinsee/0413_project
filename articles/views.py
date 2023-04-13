@@ -18,8 +18,8 @@ def index(request):
     return render(request, 'articles/index.html', context)
 
 
-def detail(request, review_pk):
-    article = Article.objects.get(pk=review_pk)
+def detail(request, artilce_pk):
+    article = Article.objects.get(pk=artilce_pk)
     comment_form = CommentForm()
     comments = article.comment_set.all()
     context = {
