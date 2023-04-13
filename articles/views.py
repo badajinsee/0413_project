@@ -46,12 +46,14 @@ def create(request):
     }
     return render(request, 'articles/create.html', context)
 
+
 @login_required
 def delete(request, artilce_pk):
     article = Article.objects.get(pk=artilce_pk)
     if request.user == article.user:
         article.delete()
     return redirect('articles:index')
+
 
 @login_required
 def update(request, article_pk):
@@ -71,3 +73,28 @@ def update(request, article_pk):
         'form': form,
     }
     return render(request, 'articles/update.html', context)
+
+
+@login_required
+def comment_create(request, article_pk):
+    article = Article.objects.get(pk=article_pk)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.article = article
+        comment.user = request.user
+        comment.save()
+        return redirect('articles:detail', article.pk)
+    context = {
+        'article': article,
+        'comment_form': comment_form,
+    }
+    return render(request, 'articles/detail.html', context)
+
+
+@login_required
+def comment_delete(request, article_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    if request.user == comment.user:
+        comment.delete()
+    return redirect('articles:detail', article_pk)
