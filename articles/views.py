@@ -52,3 +52,22 @@ def delete(request, artilce_pk):
     if request.user == article.user:
         article.delete()
     return redirect('articles:index')
+
+@login_required
+def update(request, article_pk):
+    article = Article.objects.get(pk=article_pk)
+    if request.user == article.user:
+        if request.method == 'POST':
+            form = ArticleForm(request.POST, instance=article)
+            if form.is_valid():
+                form.save()
+                return redirect('articles:detail', article.pk)
+        else:
+            form = ArticleForm(instance=article)
+    else:
+        return redirect('articles:index')
+    context = {
+        'article': article,
+        'form': form,
+    }
+    return render(request, 'articles/update.html', context)
