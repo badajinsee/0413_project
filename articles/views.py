@@ -9,12 +9,14 @@ from .forms import ArticleForm, CommentForm
 def init(request):
     return redirect('articles:index')
 
+
 def index(request):
     articles = Article.objects.all()
     context = {
         'articles': articles,
     }
     return render(request, 'articles/index.html', context)
+
 
 def detail(request, review_pk):
     article = Article.objects.get(pk=review_pk)
@@ -26,6 +28,7 @@ def detail(request, review_pk):
         'comments': comments,
     }
     return render(request, 'articles/detail.html', context)
+
 
 @login_required
 def create(request):
@@ -42,3 +45,10 @@ def create(request):
         'form': form,
     }
     return render(request, 'articles/create.html', context)
+
+@login_required
+def delete(request, artilce_pk):
+    article = Article.objects.get(pk=artilce_pk)
+    if request.user == article.user:
+        article.delete()
+    return redirect('articles:index')
