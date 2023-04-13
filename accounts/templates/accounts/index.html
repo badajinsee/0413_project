@@ -2,7 +2,10 @@
 {% if request.user.is_authenticated %}
 {{user}} 님 환영합니다!
 
-
+<form action="{% url 'accounts:logout' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="logout">
+</form>
 {% else %}
 {{user}} 님 로그인, 회원가입 해주세요
 <form action="{% url 'accounts:login' %}" method="POST">
@@ -10,7 +13,5 @@
     {{loginform}}
     <input type="submit" value="로그인">
 </form>
-{% endif %}
-
-
 <a href="{% url 'accounts:signup' %}"><button>회원가입</button></a>
+{% endif %}

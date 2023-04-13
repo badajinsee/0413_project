@@ -41,3 +41,8 @@ def login(request):
     }
     return render(request, 'accounts/index.html', context)
 
+@login_required
+def logout(request):
+    if request.method =="POST":
+        auth_logout(request)
+        return redirect('accounts:index')
