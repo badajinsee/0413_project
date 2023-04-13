@@ -1,5 +1,7 @@
+
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,python,django,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,python,django,visualstudiocode
+
 
 ### Django ###
 *.log
@@ -296,6 +298,7 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -341,4 +344,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,python,django,visualstudiocode
+
