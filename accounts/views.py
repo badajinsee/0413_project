@@ -7,7 +7,11 @@ from .forms import SignupForm , LoginForm
 
 # Create your views here.
 def index(request):
-    return render(request, 'accounts/index.html')
+    loginform = LoginForm
+    context = {
+        'loginform':loginform,
+    }
+    return render(request, 'accounts/index.html', context)
 
 def signup(request):
     if request.method == "POST":
@@ -23,3 +27,17 @@ def signup(request):
     else:
         signupform = SignupForm()
     return render(request, 'accounts/signup.html',{'signupform':signupform})
+
+def login(request):
+    if request.method == "POST":
+        loginform = AuthenticationForm(request, request.POST)
+        if loginform.is_valid():
+            auth_login(request, loginform.get_user())
+            return redirect('accounts:index')
+    else:
+        loginform = AuthenticationForm()
+    context = {
+        'loginform':loginform,
+    }
+    return render(request, 'accounts/index.html', context)
+
