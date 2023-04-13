@@ -1,3 +1,8 @@
 <h1>index</h1>
+<form action="{% url 'accoutns:login' %}" method="POST">
+    {% csrf_token %}
+    {{loginform}}
+    <input type="submit" value="로그인">
+</form>
 
 <a href="{% url 'accounts:signup' %}"><button>회원가입</button></a>
