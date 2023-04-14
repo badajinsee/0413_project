@@ -1,0 +1,11 @@
+회원 이름 : {{user.name}}
+회원 이메일 : {{user.email}}
+<hr>
+<form action="{% url 'accounts:delete'  %}">
+    {% csrf_token %}
+    <input type="submit" value="회원 탈퇴">
+</form>
+{% for review in reviews %}
+{{review.title}}
+{{reivew.content}}
+{% endfor %}
