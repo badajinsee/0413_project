@@ -33,13 +33,13 @@ def login(request):
         loginform = AuthenticationForm(request, request.POST)
         if loginform.is_valid():
             auth_login(request, loginform.get_user())
-            return redirect('accounts:index')
+            return redirect('articles:index')
     else:
         loginform = AuthenticationForm()
     context = {
         'loginform':loginform,
     }
-    return render(request, 'accounts/index.html', context)
+    return render(request, 'articles/index.html', context)
 
 @login_required
 def profile(request):

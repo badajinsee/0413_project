@@ -1,0 +1,6 @@
+<form action="{% url 'accounts:login' %}" method="POST">
+    {% csrf_token %}
+    {{loginform}}
+    <input type="submit" value="로그인">
+</form>
+<a href="{% url 'accounts:index' %}"><button>메인</button></a>
