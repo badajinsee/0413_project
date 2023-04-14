@@ -1,23 +1,46 @@
-{% comment %} 임시 파일 {% endcomment %}
+{% extends 'base.html' %}
 
-<!doctype html>
-<html lang="en">
+{% block content %}
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>index</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  </head>
+  {% if request.user.is_authenticated %}{% endif %}
 
-  <body>
-    <div class="container">
-        <h1 class="text-center my-3">index</h1>
-        <hr>  
-    </div>
-  
+  <div class="container my-3">
+    <h1 class="text-center">Main_index</h1>
+    <hr>
+    <table class="table table-striped">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">#</th>
+          <th scope="col">후기 제목</th>
+          <th scope="col">영화 제목</th>
+          <th scope="col">작성자</th>
+          <th scope="col">작성일</th>
+
+        </tr>
+      </thead>
+      {% for article in artticles %}
+        <tbody>
+          <tr onclick="window.location='{% url 'article:detail' article.pk %}'" style="cursor:pointer;">
+            <th scope='row'>{{ article.pk }}</th>
+            <td>{{ article.title }}</td>
+            <td>{{article.content}}</td>
+            <td>{{article.user}}</td>
+            <td>{{article.created_at}}</td>
+          </tr>
+        </tbody>
+      {% endfor %}
+    </table>
+    <hr>
+
+    {% comment %} 나중에 구현할 카드부분  {% endcomment %}
+    {% comment %} <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">#</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div> {% endcomment %}
+
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-</body>
-
-</html>
+{% endblock content %}
