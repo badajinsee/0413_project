@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block content %}
 회원 이름 : {{user.name}}
 회원 이메일 : {{user.email}}
 <hr>
@@ -23,3 +23,8 @@
 {{review.title}}
 {{reivew.content}}
 {% endfor %}
+{% endblock  %}
+
+
+
+

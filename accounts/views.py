@@ -38,7 +38,7 @@ def login(request):
     context = {
         'loginform':loginform,
     }
-    return render(request, 'articles/index.html', context)
+    return render(request, 'accounts/login.html', context)
 
 @login_required
 def profile(request):
