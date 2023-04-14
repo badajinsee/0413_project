@@ -5,6 +5,16 @@
     {% csrf_token %}
     <input type="submit" value="회원 탈퇴">
 </form>
+<h3>회원정보 수정</h3>
+<form action="{% url 'accounts:update' %}" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="회원정보 수정">
+</form>
+<br>
+<hr>
+작성한 리뷰들
+<hr>
 {% for review in reviews %}
 {{review.title}}
 {{reivew.content}}
