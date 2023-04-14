@@ -4,7 +4,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login , logout as auth_logout
 from django.contrib.auth.models import User
 from .forms import SignupForm , LoginForm , CustomUserCreationForm
-from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -54,5 +53,4 @@ def logout(request):
 @login_required
 def delete(request):
     request.user.delete()
-    messages.success(request, '회원 탈퇴가 완료되었습니다.')
     return redirect('accounts:index')
