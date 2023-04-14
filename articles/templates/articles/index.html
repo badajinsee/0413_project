@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  {% if request.user.is_authenticated %}{% endif %}
-
   <div class="container my-3">
     <h1 class="text-center">Main</h1>
     <hr>
@@ -18,8 +16,8 @@
         </tr>
       </thead>
       <tbody>
-        {% for article in artticles %}
-          <tr onclick="window.location='{% url 'article:detail' article.pk %}'" style="cursor:pointer;">
+        {% for article in articles %}
+          <tr onclick="window.location='{% url 'articles:detail' article.pk %}'" style="cursor:pointer;">
             <th scope='row'>{{ article.pk }}</th>
             <td>{{ article.title }}</td>
             <td>{{article.movie}}</td>
