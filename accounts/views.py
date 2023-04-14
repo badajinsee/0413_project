@@ -5,6 +5,7 @@ from django.contrib.auth import login as auth_login , logout as auth_logout
 from django.contrib.auth.models import User
 from .forms import  CustomUserCreationForm , CustomUserChangeForm 
 
+
 # Create your views here.
 def index(request):
     loginform = AuthenticationForm
@@ -43,8 +44,10 @@ def login(request):
 @login_required
 def profile(request):
     form = CustomUserChangeForm()
-    context = {
+    # reviews = Rev
+    context = { 
         'form':form,
+        # 'reviwes':reviews, 
     }
     return render(request, 'accounts/profile.html', context)
 
