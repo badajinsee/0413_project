@@ -44,10 +44,10 @@ def login(request):
 @login_required
 def profile(request):
     form = CustomUserChangeForm()
-    reviews = Article.objects.filter(user_id=request.user)
+    articles = Article.objects.filter(user_id=request.user)
     context = { 
         'form':form,
-        'reviews':reviews, 
+        'articles':articles, 
     }
     return render(request, 'accounts/profile.html', context)
 
