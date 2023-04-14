@@ -1,30 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
-회원 이름 : {{user.name}}
-회원 이메일 : {{user.email}}
-<hr>
-<form action="{% url 'accounts:delete'  %}">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-outline-primary">회원탈퇴</button>
-</form>
-<a href="{% url 'accounts:index' %}"><button class="btn btn-outline-primary">메인</button></a>
-<h3>회원정보 수정</h3>
-<form action="{% url 'accounts:update' %}" method="POST">
+  회원 이름 :
+  {{user.last_name}}{{user.first_name}}
+  <br>
+  회원 이메일 :
+  {{user.email}}
+  <hr>
+  <h3>회원정보 수정</h3>
+  <form action="{% url 'accounts:update' %}" method="POST">
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit" class="btn btn-outline-primary">회원정보 수정</button>
-</form>
-<a href="{% url 'accounts:logout' %}"><button type="button" class="btn btn-outline-primary">로그아웃</button></a>
-<br>
-<hr>
-작성한 리뷰들
-<hr>
-{% for review in reviews %}
-{{review.title}}
-{{reivew.content}}
-{% endfor %}
-{% endblock  %}
-
-
-
-
+  </form>
+  <form action="{% url 'accounts:delete'  %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-outline-primary">회원탈퇴</button>
+  </form>
+  <br>
+  <hr>
+  작성한 리뷰들
+  <hr>
+  {% for review in reviews %}
+    {{review.title}}
+    {{reivew.content}}
+  {% endfor %}
+{% endblock %}
