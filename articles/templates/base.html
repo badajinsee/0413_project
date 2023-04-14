@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Movie_review</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     {% block style %}{% endblock style %}
@@ -26,58 +26,48 @@
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'articles:index' %}">Movie Review</a>
         <div class="d-flex align-items-center">
-          <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link active" href="{% url 'accounts:login' %}">login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">create</a>
-            </li>
-          </ul>
+          {% if request.user.is_authenticated %}
+            <ul class="nav">
+              <p class="m-1 pt-1">
+                <b>{{user}}</b>
+                님 안녕하세요.
+              </p>
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'accounts:logout' %}">logout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'articles:create' %}">create</a>
+              </li>
+            </ul>
+          {% else %}
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'accounts:login' %}">login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:signup' %}">signup</a>
+              </li>
+            </ul>
+          {% endif %}
         </div>
       </div>
     </nav>
 
     <!-- sidebar & container -->
-    <div class="container sidebar ">
-      <div class="row mt-4">
-        <div class="col-2 d-flex justify-content-left">
-          <div class='mt-1'>
-            <ul>
-              <b>
-                <a href="">
-                  <li>목록1</li>
-                </a>
-              </b>
-              <b>
-                <a href="">
-                  <li>목록2</li>
-                </a>
-              </b>
-            </ul>
-          </div>
-        </div>
-        <div class="col-10 text-start">
-          {% block content %}{% endblock content %}
-          <p>
-            테스트 텍스트</p>
-          <p>
-            테스트 텍스트</p>
-          <p>
-            테스트 텍스트</p>
-        </div>
-      </div>
+    <div class="container ">
+      {% block content %}{% endblock content %}
     </div>
+  </div>
 
-    <!-- footer -->
-    <footer class="text-center fixed-bottom">
-      <div class=" text-center p-2 pt-3" style=" background-color: #e3f2fd;">
-        <p class="text-sm">
-          Created by 곽재은, 이태영, 한선진 © 2023-04-13
-        </p>
-      </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-  </body>
+  <!-- footer -->
+  <footer class="text-center fixed-bottom">
+    <div class=" text-center p-2 pt-3" style=" background-color: #e3f2fd;">
+      <p class="text-sm">
+        Created by 곽재은, 이태영, 한선진 © 2023-04-13
+      </p>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
 
 </html>
