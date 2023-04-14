@@ -1,28 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
-  회원 이름 :
-  {{user.last_name}}{{user.first_name}}
-  <br>
-  회원 이메일 :
-  {{user.email}}
-  <hr>
-  <h3>회원정보 수정</h3>
-  <div class="d-flex-inline">
-    <form action="{% url 'accounts:update' %}" method="POST">
-      {% csrf_token %}
-      {{form.as_p}}
-      <button type="submit" class="btn btn-outline-warning m-1">회원정보 수정</button>
-    </form>
-    <form action="{% url 'accounts:delete'%}">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-outline-danger m-1">회원탈퇴</button>
-    </form>
+  <div class="d-flex flex-row justify-content-between">
+    <div>
+      <p>회원 이름:
+        {{ user.last_name }}
+        {{ user.first_name }}</p>
+      <p>회원 이메일:
+        {{ user.email }}</p>
+    </div>
+    <div>
+      <form action="{% url 'accounts:update' %}" method="POST" style="display: inline-block; margin-right: 5px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-primary d-flex justify-content-end">회원정보 수정</button>
+      </form>
+      <form action="{% url 'accounts:delete' %}" method="POST" style="display: inline-block;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-primary">회원탈퇴</button>
+      </form>
+    </div>
   </div>
-
-  <br>
   <hr>
-  <b>내가 쓴 글</b>
-  <hr>
+  <h3>내가 쓴 글</h3>
   <table class="table table-striped">
     <thead>
       <tr class="table-primary">
@@ -31,7 +30,6 @@
         <th scope="col">영화 제목</th>
         <th scope="col">작성자</th>
         <th scope="col">작성일</th>
-
       </tr>
     </thead>
     <tbody>
@@ -39,12 +37,11 @@
         <tr onclick="window.location='{% url 'articles:detail' article.pk %}'" style="cursor:pointer;">
           <th scope='row'>{{ article.pk }}</th>
           <td>{{ article.title }}</td>
-          <td>{{article.movie}}</td>
-          <td>{{article.user}}</td>
-          <td>{{article.created_at}}</td>
+          <td>{{ article.movie }}</td>
+          <td>{{ article.user }}</td>
+          <td>{{ article.created_at }}</td>
         </tr>
-      </tbody>
-    {% endfor %}
+      {% endfor %}
+    </tbody>
   </table>
-
 {% endblock %}

@@ -68,7 +68,7 @@ def update(request):
         form = CustomUserChangeForm(request.POST, instance = request.user)
         if form.is_valid():
             form.save()
-            return redirect('accounts:index')
+            return redirect('articles:index')
     else:
         form = CustomUserChangeForm()
     context ={
