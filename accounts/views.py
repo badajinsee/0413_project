@@ -4,10 +4,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login , logout as auth_logout
 from django.contrib.auth.models import User
 from .forms import SignupForm , LoginForm , CustomUserCreationForm
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
-    loginform = LoginForm
+    loginform = AuthenticationForm
     context = {
         'loginform':loginform,
     }
@@ -41,7 +42,17 @@ def login(request):
     return render(request, 'accounts/index.html', context)
 
 @login_required
+def profile(request):
+    return render(request, 'accounts/profile.html')
+
+@login_required
 def logout(request):
     if request.method =="POST":
         auth_logout(request)
         return redirect('accounts:index')
+
+@login_required
+def delete(request):
+    request.user.delete()
+    messages.success(request, '회원 탈퇴가 완료되었습니다.')
+    return redirect('accounts:index')
