@@ -17,23 +17,39 @@
       a {
         text-decoration: none;
       }
+
+      .font {
+        font-family: 'EF_jejudoldam';
+      }
+
+      @font-face {
+        font-family: 'EF_jejudoldam';
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2") format('woff2');
+        font-weight: normal;
+        font-style: normal;
+      }
     </style>
+
   </head>
 
   <body>
     <!-- Navbar -->
     <nav class="navbar" style=" background-color: #e3f2fd;">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'articles:index' %}">Movie Review</a>
+        <a class="navbar-brand font" href="{% url 'articles:index' %}">Movie Review</a>
         <div class="d-flex align-items-center">
           {% if request.user.is_authenticated %}
             <ul class="nav">
               <p class="m-1 pt-1">
-                <b>{{user}}</b>
-                님 안녕하세요.
+                <a href="{% url 'accounts:profile' %}">
+                  <b>{{user}}</b>
+                  님 안녕하세요.</a>
               </p>
               <li class="nav-item">
-                <a class="nav-link active" href="{% url 'accounts:logout' %}">logout</a>
+                <form action="{% url 'accounts:logout' %}" method="POST">
+                  {% csrf_token %}
+                  <input type="submit" class="nav-link active" value="logout">
+                </form>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'articles:create' %}">create</a>

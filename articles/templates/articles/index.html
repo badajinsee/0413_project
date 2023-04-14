@@ -4,7 +4,7 @@
   {% if request.user.is_authenticated %}{% endif %}
 
   <div class="container my-3">
-    <h1 class="text-center">Main_index</h1>
+    <h1 class="text-center">Main</h1>
     <hr>
     <table class="table table-striped">
       <thead>
@@ -17,12 +17,12 @@
 
         </tr>
       </thead>
-      {% for article in artticles %}
-        <tbody>
+      <tbody>
+        {% for article in artticles %}
           <tr onclick="window.location='{% url 'article:detail' article.pk %}'" style="cursor:pointer;">
             <th scope='row'>{{ article.pk }}</th>
             <td>{{ article.title }}</td>
-            <td>{{article.content}}</td>
+            <td>{{article.movie}}</td>
             <td>{{article.user}}</td>
             <td>{{article.created_at}}</td>
           </tr>
@@ -30,16 +30,5 @@
       {% endfor %}
     </table>
     <hr>
-
-    {% comment %} 나중에 구현할 카드부분  {% endcomment %}
-    {% comment %} <div class="card" style="width: 18rem;">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">#</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div> {% endcomment %}
-
   </div>
 {% endblock content %}
