@@ -24,9 +24,8 @@
     <!-- Navbar -->
     <nav class="navbar" style=" background-color: #e3f2fd;">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Movie Review</a>
+        <a class="navbar-brand" href="{% url 'articles:index' %}">Movie Review</a>
         <div class="d-flex align-items-center">
-
           {% if request.user.is_authenticated %}
             <ul class="nav">
               <p class="m-1 pt-1">
@@ -50,7 +49,6 @@
               </li>
             </ul>
           {% endif %}
-
         </div>
       </div>
     </nav>
