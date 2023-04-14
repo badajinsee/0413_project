@@ -18,10 +18,30 @@
   </form>
   <br>
   <hr>
-  작성한 리뷰들
+  <b>내가 쓴 글</b>
   <hr>
-  {% for review in reviews %}
-    {{review.title}}
-    {{reivew.content}}
-  {% endfor %}
+  <table class="table table-striped">
+    <thead>
+      <tr class="table-primary">
+        <th scope="col">#</th>
+        <th scope="col">후기 제목</th>
+        <th scope="col">영화 제목</th>
+        <th scope="col">작성자</th>
+        <th scope="col">작성일</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for article in articles %}
+        <tr onclick="window.location='{% url 'articles:detail' article.pk %}'" style="cursor:pointer;">
+          <th scope='row'>{{ article.pk }}</th>
+          <td>{{ article.title }}</td>
+          <td>{{article.movie}}</td>
+          <td>{{article.user}}</td>
+          <td>{{article.created_at}}</td>
+        </tr>
+      </tbody>
+    {% endfor %}
+  </table>
+
 {% endblock %}

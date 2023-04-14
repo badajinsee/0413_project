@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<br><br>
+<div class="card">
+    <div class="card-body">
+    <h1>login</h1>
 <form action="{% url 'accounts:login' %}" method="POST">
     {% csrf_token %}
-    {{loginform}}
+    {{loginform.as_p}}
     <input type="submit" value="로그인">
 </form>
+    </div>
+  </div>
 {% endblock  %}
 
 
