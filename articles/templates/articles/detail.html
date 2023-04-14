@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="my-5">
+    <h1>detail</h1>
+    <hr class="mb-5">
+    <p>글 번호: {{ article.pk }}</p>
+    <p>제목: {{ article.title }}</p>
+    <p>내용: {{ article.content }}</p>
+    <p>작성일: {{ article.created_at }}</p>
+    <p>수정일: {{ article.updated_at }}</p>
+
+    <hr>  
+    {% if request.user == article.user %}
+    <form action="{% url 'articles:delete' article.pk  %}" method="POST">
+      {% csrf_token %}
+      <div class="d-flex flex-row-reverse">
+        <input type="submit" value="삭제" class="btn btn-outline-danger m-3">
+        <a href="{% url 'articles:update' article.pk %}" class="btn btn-outline-warning m-3">UPDATE</a>
+      </div>
+    </form>
+  {% endif %}
+
+
+  <hr>
+  <h4>댓글 목록</h4>
+  <ul>
+    {% for comment in comments %}
+      <li>
+        {{ comment.user }} - {{ comment.content }}
+        {% if request.user == comment.user %}
+          <form action="{% url 'articles:comment_delete' article.pk comment.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="삭제" class="btn btn-outline-danger">
+          </form>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  <hr>
+  <form action="{% url 'articles:comment_create' article.pk %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="submit" class="btn btn-outline-primary mx-3">
+    <a href="{% url 'articles:index' %}" class="btn btn-outline-info">back</a>
+  </form>
+</div>
+
+{% endblock content %}
