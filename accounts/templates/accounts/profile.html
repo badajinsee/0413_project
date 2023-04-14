@@ -21,7 +21,9 @@
   작성한 리뷰들
   <hr>
   {% for review in reviews %}
-    {{review.title}}
-    {{reivew.content}}
+    리뷰 이름 : {{review.title}}
+    리뷰 내용 : {{reivew.content}}
+    <hr>
   {% endfor %}
+
 {% endblock %}
